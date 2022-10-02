@@ -7,8 +7,9 @@ volumes:
 services:
   katana:
     build:
-      context: ./docker
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker\Dockerfile
     volumes:
+      - ./examples:/examples
       - target-files:/data/targets
       - results-files:/data/results

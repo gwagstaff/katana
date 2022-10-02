@@ -40,7 +40,8 @@ RUN make
 RUN cp /usr/snow-20130616/snow /usr/local/bin/snow && chmod +x /usr/local/bin/snow
 
 # Clone Katana Repository
-RUN git clone --recursive https://github.com/gwagstaff/katana.git /katana
+COPY ./katana /katana
+COPY requirements.txt /katana/requirements.txt
 # Install katana python dependencies
 WORKDIR /katana
 RUN pip install -r requirements.txt
@@ -49,9 +50,9 @@ RUN pip install -r requirements.txt
 RUN mkdir /data
 
 # Copy the start script
-COPY katana.sh /start.sh
+COPY docker/katana.sh /start.sh
 RUN chmod +x /start.sh
 
+WORKDIR /
 # Run katana
-ENTRYPOINT ["/start.sh"]
-CMD ["-c", "/data/katana.ini", "-m", "monitor=/data/targets,outdir=/data/results"]
+CMD ["bash","/start.sh", "-c", "/data/katana.ini", "-m", "monitor=/data/targets,outdir=/data/results"]
