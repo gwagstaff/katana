@@ -1,0 +1,14 @@
+version: "3"
+
+volumes:
+  target-files:
+  results-files:
+
+services:
+  katana:
+    build:
+      context: ./docker
+      dockerfile: Dockerfile
+    volumes:
+      - target-files:/data/targets
+      - results-files:/data/results

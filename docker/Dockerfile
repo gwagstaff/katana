@@ -10,6 +10,7 @@ RUN apt-get update -qq \
 	libdbus-glib-1-dev ruby libenchant-2-dev apktool nodejs groff binwalk \
 	foremost tcpflow poppler-utils exiftool steghide stegsnow bison ffmpeg \
 	libgd-dev less \
+	ruby ruby-dev ruby-bundler build-essential \
 	# Clean up for smaller images
 	&& apt-get clean \
 	&& rm -rf /var/lib/apt/lists/*
@@ -39,7 +40,7 @@ RUN make
 RUN cp /usr/snow-20130616/snow /usr/local/bin/snow && chmod +x /usr/local/bin/snow
 
 # Clone Katana Repository
-RUN git clone --recursive https://github.com/JohnHammond/katana.git /katana
+RUN git clone --recursive https://github.com/gwagstaff/katana.git /katana
 # Install katana python dependencies
 WORKDIR /katana
 RUN pip install -r requirements.txt
